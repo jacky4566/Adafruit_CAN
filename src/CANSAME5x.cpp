@@ -366,7 +366,7 @@ int CANSAME5x::endPacket() {
   buf.txb1.bit.DLC = _txLength;
 
   if (!_txRtr) {
-    memcpy(buf.data, _txData, _txLength);
+    memcpy(buf.data, txData, _txLength);
   }
 
   // TX buffer add request
@@ -405,7 +405,7 @@ int CANSAME5x::_parsePacket() {
     _rxLength = 0;
   } else {
     _rxLength = _rxDlc;
-    memcpy(_rxData, hw_message.data, _rxLength);
+    memcpy(rxData, hw_message.data, _rxLength);
   }
 
   _rxIndex = 0;
