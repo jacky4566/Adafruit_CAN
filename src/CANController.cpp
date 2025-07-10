@@ -53,7 +53,7 @@ int CANControllerClass::beginPacket(int id, int dlc, bool rtr) {
   _txDlc = dlc;
   _txLength = 0;
 
-  memset(txData, 0x00, sizeof(txData));
+  memset(_txData, 0x00, sizeof(_txData));
 
   return 1;
 }
@@ -74,7 +74,7 @@ int CANControllerClass::beginExtendedPacket(long id, int dlc, bool rtr) {
   _txDlc = dlc;
   _txLength = 0;
 
-  memset(txData, 0x00, sizeof(txData));
+  memset(_txData, 0x00, sizeof(_txData));
 
   return 1;
 }
@@ -111,11 +111,11 @@ size_t CANControllerClass::write(const uint8_t *buffer, size_t size) {
     return 0;
   }
 
-  if (size > (sizeof(txData) - _txLength)) {
-    size = sizeof(txData) - _txLength;
+  if (size > (sizeof(_txData) - _txLength)) {
+    size = sizeof(_txData) - _txLength;
   }
 
-  memcpy(&txData[_txLength], buffer, size);
+  memcpy(&_txData[_txLength], buffer, size);
   _txLength += size;
 
   return size;
@@ -128,7 +128,7 @@ int CANControllerClass::read() {
     return -1;
   }
 
-  return rxData[_rxIndex++];
+  return _rxData[_rxIndex++];
 }
 
 int CANControllerClass::peek() {
@@ -136,7 +136,7 @@ int CANControllerClass::peek() {
     return -1;
   }
 
-  return rxData[_rxIndex];
+  return _rxData[_rxIndex];
 }
 
 void CANControllerClass::flush() {}

@@ -24,9 +24,6 @@ public:
   bool packetRtr();
   int packetDlc();
 
-  uint8_t txData[8];
-  uint8_t rxData[8];
-
   // from Print
   virtual size_t write(uint8_t byte);
   virtual size_t write(const uint8_t *buffer, size_t size);
@@ -62,6 +59,7 @@ protected:
   bool _txRtr;
   int _txDlc;
   int _txLength;
+  uint8_t _txData[8];
 
   long _rxId;
   bool _rxExtended;
@@ -69,6 +67,7 @@ protected:
   int _rxDlc;
   int _rxLength;
   int _rxIndex;
+  uint8_t _rxData[8];
 };
 
 #endif
